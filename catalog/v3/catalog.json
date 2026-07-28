@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-07-28T16:20:01.061Z",
+  "generatedAt": "2026-07-28T17:04:01.766Z",
   "packages": [
     {
       "manifest": {
@@ -65,9 +65,9 @@
         "restartRequired": true
       },
       "category": "misc",
-      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artwork/agent-covers/eightball.png",
+      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artwork/agent-covers/eightball.png",
       "artifact": {
-        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artifacts/eightball-1.0.3.zip",
+        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artifacts/eightball-1.0.3.zip",
         "sha256": "7ea090ae4df0cb0a73225ad862ec20ff1af61a4d07adfc9c0e7b957731fd2381",
         "bytes": 200104
       },
@@ -132,9 +132,9 @@
         "restartRequired": true
       },
       "category": "misc",
-      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artwork/agent-covers/chess.png",
+      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artwork/agent-covers/chess.png",
       "artifact": {
-        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artifacts/chess-1.0.3.zip",
+        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artifacts/chess-1.0.3.zip",
         "sha256": "204cc456f0371cc06621d50d6f6ba85a52b942d5743ff13087af9f63950162a5",
         "bytes": 203897
       },
@@ -201,9 +201,9 @@
         "restartRequired": true
       },
       "category": "misc",
-      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artwork/agent-covers/poker.png",
+      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artwork/agent-covers/poker.png",
       "artifact": {
-        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artifacts/poker-1.0.3.zip",
+        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artifacts/poker-1.0.3.zip",
         "sha256": "4567402dc2cf8045084a445b598b0429e0e59ff5c74ec09d60c42ffac66cc842",
         "bytes": 195438
       },
@@ -270,9 +270,9 @@
         "restartRequired": true
       },
       "category": "misc",
-      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artwork/agent-covers/rock-paper-scissors.png",
+      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artwork/agent-covers/rock-paper-scissors.png",
       "artifact": {
-        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artifacts/rock-paper-scissors-1.0.3.zip",
+        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artifacts/rock-paper-scissors-1.0.3.zip",
         "sha256": "a9224ba5cae7c3368667d498eead163d9cf59e1ad51fc65a3289d747f51fb03e",
         "bytes": 188798
       },
@@ -340,9 +340,9 @@
         "restartRequired": true
       },
       "category": "misc",
-      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artwork/agent-covers/tic-tac-toe.png",
+      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artwork/agent-covers/tic-tac-toe.png",
       "artifact": {
-        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artifacts/tic-tac-toe-1.0.3.zip",
+        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artifacts/tic-tac-toe-1.0.3.zip",
         "sha256": "6de73b0a47fc044ca76e55ede4f76aa751feeaebe9f8ff5547831b8c5112c76c",
         "bytes": 187981
       },
@@ -407,9 +407,9 @@
         "restartRequired": true
       },
       "category": "misc",
-      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artwork/agent-covers/uno.png",
+      "iconUrl": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artwork/agent-covers/uno.png",
       "artifact": {
-        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artifacts/uno-1.0.3.zip",
+        "url": "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artifacts/uno-1.0.3.zip",
         "sha256": "f100a36db98bb9935de190a368a6e2fcd9b46fa2f4ef6975ddbdedbe42240ee8",
         "bytes": 194942
       },
