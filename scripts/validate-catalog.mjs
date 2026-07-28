@@ -9,6 +9,7 @@ import {
   catalogArtworkRelativePath,
   catalogArtworkUrl,
 } from "./catalog-artwork.mjs";
+import { catalogArtifactUrl, resolveCatalogBranch } from "./catalog-channel.mjs";
 import {
   LEGACY_CATALOG_MAJOR,
   assertManifestBuildProvenance,
@@ -21,6 +22,7 @@ import { assertPackagePrivateImportBoundary } from "./package-engine-boundary.mj
 import { OFFICIAL_PACKAGE_GUIDANCE, withPackageActivationGuidance } from "./catalog-package-guidance.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const catalogBranch = resolveCatalogBranch(process.env, repoRoot);
 const { catalog, catalogsByMajor, legacyCatalog } = await readCatalogFamily(repoRoot);
 const MIN_ENGINE_VERSION = "2.3.0";
 if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.packages)) throw new Error("Invalid catalog envelope");
@@ -294,12 +296,11 @@ for (const entry of catalog.packages) {
     throw new Error(`Expected ${manifest.id} in ${expectedCategory}, found ${category}`);
   }
   if (!documentationUrl) throw new Error(`Missing documentation URL for ${manifest.id}`);
-  if (iconUrl !== catalogArtworkUrl(manifest.id)) {
+  if (iconUrl !== catalogArtworkUrl(manifest.id, catalogBranch)) {
     throw new Error(`Missing or invalid catalog artwork URL for ${manifest.id}`);
   }
   const expectedArtifactName = `${manifest.id}-${manifest.version}.zip`;
-  const expectedArtifactUrl =
-    `https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artifacts/${expectedArtifactName}`;
+  const expectedArtifactUrl = catalogArtifactUrl(expectedArtifactName, catalogBranch);
   if (artifact.url !== expectedArtifactUrl) {
     throw new Error(`Artifact URL for ${manifest.id} must be ${expectedArtifactUrl}`);
   }

@@ -8,6 +8,8 @@ Across its Engine compatibility lanes, the catalog currently contains **31 first
 
 ## Official catalog
 
+The repository publishes two coordinated channels. Marinara Engine `staging` consumes the Agents `staging` catalog for beta testing, while Engine `main` and tagged releases consume the Agents `main` production catalog. Package changes land in `staging` first and are promoted to `main` only after their generated catalog URLs are normalized to the production channel.
+
 ### Writer Agents
 
 | Agent | Package | What it does |
@@ -68,7 +70,7 @@ Conversation mode's About Me profile and `update_about_me` tool are built into M
 
 ## Contributing
 
-Agent ideas, bugs, documentation corrections, and package improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before starting: contributions begin with an issue, target the `main` branch, must be marked ready for review, and require an approving review before merge. CodeRabbit automatically reviews ready pull requests.
+Agent ideas, bugs, documentation corrections, and package improvements are welcome. Read [CONTRIBUTING.md](CONTRIBUTING.md) before starting: contributions begin with an issue, target the `staging` branch, must be marked ready for review, and require an approving review before merge. CodeRabbit automatically reviews ready pull requests.
 
 ## Maintainer build
 

@@ -1,4 +1,4 @@
-<!-- Target branch: `main`. -->
+<!-- Target branch: `staging`. -->
 <!-- Open as a draft while implementation is in progress. Mark Ready for review only after validation and self-review. -->
 
 ## Linked issue

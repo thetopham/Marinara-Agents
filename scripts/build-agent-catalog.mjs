@@ -5,10 +5,12 @@ import { basename, dirname, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { catalogArtworkUrl } from "./catalog-artwork.mjs";
+import { catalogArtifactUrl, resolveCatalogBranch } from "./catalog-channel.mjs";
 import { readCatalogFamily, writeCatalogFamily } from "./catalog-lanes.mjs";
 import { withPackageActivationGuidance } from "./catalog-package-guidance.mjs";
 
 const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const catalogBranch = resolveCatalogBranch(process.env, repoRoot);
 const artifactsDir = join(repoRoot, "artifacts");
 const packagesDir = join(repoRoot, "packages");
 const MIN_ENGINE_VERSION = "2.3.0";
@@ -91,9 +93,9 @@ for (const id of selectedPackageDirectories) {
     rebuiltPackages.push({
       manifest,
       category,
-      iconUrl: catalogArtworkUrl(id),
+      iconUrl: catalogArtworkUrl(id, catalogBranch),
       artifact: {
-        url: `https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artifacts/${basename(artifactPath)}`,
+        url: catalogArtifactUrl(basename(artifactPath), catalogBranch),
         sha256: sha256(artifact),
         bytes: artifact.byteLength,
       },

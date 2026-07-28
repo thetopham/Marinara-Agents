@@ -6,18 +6,19 @@ Thank you for helping improve the official downloadable packages for [Marinara E
 
 1. Open an issue or check the [issue tracker](https://github.com/Pasta-Devs/Marinara-Agents/issues) before implementing a new package or material behavior change. This lets maintainers agree on scope and prevents duplicate work.
 2. Check for an issue-linked branch, open or draft PR, and visible owner before beginning work.
-3. Base changes on `main`, the protected branch containing the published catalog consumed by Marinara Engine.
+3. Base changes on `staging`, the protected active-development branch consumed by Marinara Engine staging builds.
 
 ## Branches
 
 | Branch | Role |
 | --- | --- |
-| `main` | Protected development and release branch. Package, catalog, documentation, and CI pull requests target this branch. |
+| `staging` | Protected active-development and beta-catalog branch. Package, catalog, documentation, and CI pull requests target this branch. |
+| `main` | Protected release branch containing the production catalog consumed by released Marinara Engine builds. |
 
-Create a focused feature branch from current main:
+Create a focused feature branch from current staging:
 
 ```bash
-git checkout main
+git checkout staging
 git pull
 git checkout -b feature/short-description
 ```
@@ -70,6 +71,31 @@ node scripts/build-feature-packages.mjs
 
 Both builders accept package IDs for a focused rebuild. When a build changes an artifact, commit the package payload, manifest, ZIP, catalog entry, and captured Engine sources together. Do not hand-edit generated bundles, checksums, byte sizes, or ZIP contents.
 
+### Catalog release channels
+
+Marinara Engine and Marinara Agents use matching long-lived channels:
+
+- Engine `staging` consumes the Agents `staging` catalog and artifacts.
+- Engine `main` and tagged releases consume the Agents `main` catalog and artifacts.
+
+Direct builds on `staging` and GitHub pull requests targeting `staging` select the staging channel automatically. On a local feature branch, set the channel explicitly for every builder and validator command:
+
+```bash
+MARINARA_AGENTS_CATALOG_BRANCH=staging node scripts/build-agent-catalog.mjs
+MARINARA_AGENTS_CATALOG_BRANCH=staging node scripts/build-feature-packages.mjs
+MARINARA_AGENTS_CATALOG_BRANCH=staging node scripts/validate-catalog.mjs
+```
+
+Before promoting `staging` to `main`, create a release branch from `staging`, normalize every generated catalog URL back to the production channel, and validate it:
+
+```bash
+MARINARA_AGENTS_CATALOG_BRANCH=main node scripts/sync-catalog-channel.mjs
+MARINARA_AGENTS_CATALOG_BRANCH=main node scripts/test-catalog-lanes.mjs
+MARINARA_AGENTS_CATALOG_BRANCH=main node scripts/validate-catalog.mjs
+```
+
+Commit the normalized catalog lanes in the release PR to `main`. Do not merge staging-channel URLs into `main`.
+
 ### Engine compatibility and catalog lanes
 
 Each emitted package manifest is the source of truth for Engine compatibility. For ordinary Agent packages, edit the manifest range; for generated feature packages, edit the feature definition in `scripts/build-feature-packages.mjs`, which emits that range into the manifest. The builders automatically publish an entry into every Engine-major lane intersected by `engine.min` (inclusive) and `engine.maxExclusive` (exclusive). For example, `>=2.3.0 <3.0.0` publishes only to v2, `>=2.3.0 <4.0.0` publishes to v2 and v3, and `>=3.2.0 <3.3.0` publishes only to v3. `catalog/catalog.json` remains an exact v2 alias for Engine releases that predate lane selection.
@@ -85,8 +111,8 @@ Hierarchical Maps also owns `packages/hierarchical-maps/engine-boundary.json`. I
 Every pull request must run:
 
 ```bash
-node scripts/test-catalog-lanes.mjs
-node scripts/validate-catalog.mjs
+MARINARA_AGENTS_CATALOG_BRANCH=staging node scripts/test-catalog-lanes.mjs
+MARINARA_AGENTS_CATALOG_BRANCH=staging node scripts/validate-catalog.mjs
 git diff --check
 ```
 
@@ -97,7 +123,7 @@ Also manually install or update affected packages through **Agents → Download 
 ## Pull Request Expectations
 
 - Link the issue with `Closes #<number>`, `Fixes #<number>`, or `Resolves #<number>`.
-- Target `main`.
+- Target `staging`.
 - Keep the PR focused and explain the user-facing reason for the change.
 - Mark the PR ready for review only after local validation and self-review.
 - Let CodeRabbit review the ready PR and address actionable findings.
@@ -120,7 +146,7 @@ A new package must include:
 
 Security-sensitive permissions and executable client/server entrypoints must be narrowly scoped and justified in the PR description.
 
-Package hashes are integrity checks, not independent publisher signatures. A contributor who can change both an artifact and its catalog entry can also change the recorded hash. For that reason, changes under `packages/`, `sources/`, `artifacts/`, `catalog/`, `scripts/`, or `.github/workflows/` require the code-owner review configured in `.github/CODEOWNERS`. Maintainers must keep **Require review from Code Owners** and stale-approval dismissal enabled for `main`; see [SECURITY.md](SECURITY.md) for the full repository ruleset.
+Package hashes are integrity checks, not independent publisher signatures. A contributor who can change both an artifact and its catalog entry can also change the recorded hash. For that reason, changes under `packages/`, `sources/`, `artifacts/`, `catalog/`, `scripts/`, or `.github/workflows/` require the code-owner review configured in `.github/CODEOWNERS`. Maintainers must keep **Require review from Code Owners** and stale-approval dismissal enabled for both `staging` and `main`; see [SECURITY.md](SECURITY.md) for the full repository ruleset.
 
 ## AI Agent Workflow
 

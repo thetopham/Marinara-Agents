@@ -15,4 +15,4 @@ Catalog SHA-256 values detect accidental corruption and mismatched downloads. Th
 - validates source manifests, archive contents, file hashes, catalog lanes, and generated outputs in pull requests; and
 - pins third-party GitHub Actions by full commit SHA.
 
-Repository administrators should keep `main` protected with pull requests required, Code Owner review required, stale approvals dismissed after new commits, the catalog validation check required, force pushes and branch deletion disabled, and administrator bypass restricted. `CODEOWNERS` requests review, but GitHub enforces it only when the matching branch-protection or ruleset option is enabled.
+Repository administrators should keep both `staging` and `main` protected with pull requests required, Code Owner review required, stale approvals dismissed after new commits, the catalog validation check required, force pushes and branch deletion disabled, and administrator bypass restricted. `CODEOWNERS` requests review, but GitHub enforces it only when the matching branch-protection or ruleset option is enabled.

@@ -3,6 +3,27 @@ import {
   assertManifestBuildProvenance,
   catalogMajorsForRange,
 } from "./catalog-lanes.mjs";
+import {
+  catalogArtifactUrl,
+  officialRawUrl,
+  resolveCatalogBranch,
+} from "./catalog-channel.mjs";
+
+assert.equal(resolveCatalogBranch({ MARINARA_AGENTS_CATALOG_BRANCH: "staging" }), "staging");
+assert.equal(resolveCatalogBranch({ GITHUB_BASE_REF: "staging" }), "staging");
+assert.equal(resolveCatalogBranch({ GITHUB_REF_NAME: "main" }), "main");
+assert.throws(
+  () => resolveCatalogBranch({ MARINARA_AGENTS_CATALOG_BRANCH: "feature/unsafe" }),
+  /must be main or staging/u,
+);
+assert.equal(
+  catalogArtifactUrl("storyboard-1.0.0.zip", "staging"),
+  "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/staging/artifacts/storyboard-1.0.0.zip",
+);
+assert.equal(
+  officialRawUrl("artwork/agent-covers/storyboard.png", "main"),
+  "https://raw.githubusercontent.com/Pasta-Devs/Marinara-Agents/main/artwork/agent-covers/storyboard.png",
+);
 
 assert.deepEqual(catalogMajorsForRange("2.3.0", "3.0.0"), [2]);
 assert.deepEqual(catalogMajorsForRange("2.3.0", "4.0.0"), [2, 3]);
